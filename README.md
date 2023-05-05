@@ -1,10 +1,20 @@
-# 代币合约开发
+# 一键发币
 
 ## 代码位置
 
 ### 合约位置
 ```html
+// 克隆工厂合约, 创建代币工厂合约
+contracts/ERC20V1Factory.sol
+
+// 标准ERC20模板合约
 contracts/ERC20Ext.sol
+
+```
+
+### truffle
+```html
+migrations/*.js
 ```
 
 ### js
@@ -16,33 +26,14 @@ src/js/app.js
 src/index.html
 ```
 
-## 演示
+## 合约信息
+```html
+CloneFactory（克隆工厂合约）: 0x5AB310Aeb9a92017DB43c7282eDD6E1A2A29a1df
+ERC20Ext（ERC20模板合约）: 0x9577C698e70b79A2B0761B610f88d34E7835cA8F
+ERC20V1Factory（创建代币工厂合约）: 0x9577C698e70b79A2B0761B610f88d34E7835cA8F
+```
 
-### >>> step 1 页面展示
+## 页面展示
 
 ![](https://github.com/guozhouwei/tmp/blob/main/images/001.png)
-
-### >>> step 2 代币初始值
-先部署代币合约到sepolia测试网络，获取合约地址，导入小狐狸钱包。
-![](https://github.com/guozhouwei/tmp/blob/main/images/01.png)
-如上图：代币有0.09999ADT
-### >>> step 3 mint
-铸造 3*1000000000000000000个代币，如下图：
-![](https://github.com/guozhouwei/tmp/blob/main/images/002.png)
-如上图：代币变为3.09999ADT
-
-### >>> step 4 burn
-燃烧 2*1000000000000000000个代币，如下图：
-![](https://github.com/guozhouwei/tmp/blob/main/images/003.png)
-如上图：代币变为1.09999ADT
-
----------------------
-
-## 环境准备
-### truffle
-
-
-truffle migrate --network sepolia --to 2
-
-
 
