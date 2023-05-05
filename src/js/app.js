@@ -3,7 +3,26 @@
 var web3;
 var chainId;
 var accountAddress;
+//
+//合约地址，偷懒写成常量
+var CloneFactory = "0x5AB310Aeb9a92017DB43c7282eDD6E1A2A29a1df";
+var std_ERC20Ext = "0x9577C698e70b79A2B0761B610f88d34E7835cA8F";
+var ERC20V1Factory_contractAddress = "0xEA35FFe6cfC2c83298712E5D56a3ECD1F2AFdd9f";
+
 var _ERC20V1FactoryAbi = [
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "newFee",
+				"type": "uint256"
+			}
+		],
+		"name": "changeCreateFee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
 	{
 		"inputs": [
 			{
@@ -50,6 +69,60 @@ var _ERC20V1FactoryAbi = [
 		],
 		"name": "ChangeStdTemplate",
 		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "claimOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "totalSupply",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "symbol",
+				"type": "string"
+			},
+			{
+				"internalType": "uint8",
+				"name": "decimals",
+				"type": "uint8"
+			}
+		],
+		"name": "createStdERC20",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "newERC20",
+				"type": "address"
+			}
+		],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "initOwner",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -115,6 +188,19 @@ var _ERC20V1FactoryAbi = [
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -136,6 +222,30 @@ var _ERC20V1FactoryAbi = [
 	{
 		"stateMutability": "payable",
 		"type": "fallback"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newStdTemplate",
+				"type": "address"
+			}
+		],
+		"name": "updateStdTemplate",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
 	},
 	{
 		"inputs": [],
@@ -229,60 +339,6 @@ var _ERC20V1FactoryAbi = [
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "newFee",
-				"type": "uint256"
-			}
-		],
-		"name": "changeCreateFee",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "claimOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "totalSupply",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "symbol",
-				"type": "string"
-			},
-			{
-				"internalType": "uint8",
-				"name": "decimals",
-				"type": "uint8"
-			}
-		],
-		"name": "createStdERC20",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "newERC20",
-				"type": "address"
-			}
-		],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
 				"name": "user",
 				"type": "address"
@@ -298,56 +354,6 @@ var _ERC20V1FactoryAbi = [
 		],
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "initOwner",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "newStdTemplate",
-				"type": "address"
-			}
-		],
-		"name": "updateStdTemplate",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "withdraw",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"stateMutability": "payable",
-		"type": "receive"
 	}
 ]
 
@@ -385,10 +391,6 @@ async function connect() {
 }
 
 async function buildTokenCoin() {
-	//合约地址
-	//var CloneFactory = "0x5AB310Aeb9a92017DB43c7282eDD6E1A2A29a1df";
-	//var std_ERC20Ext = "0x9577C698e70b79A2B0761B610f88d34E7835cA8F";
-	var ERC20V1Factory_contractAddress = "0x9577C698e70b79A2B0761B610f88d34E7835cA8F";
 	
 	//验证参数 略
 	var std_ERC20Ext = document.getElementById("std_erc20_id").value;
@@ -398,17 +400,56 @@ async function buildTokenCoin() {
 	var tokencoin_decimals = document.getElementById("tokencoin_decimals_id").value;
 
 	//
-	var instance = new web3.eth.Contract(_ERC20V1FactoryAbi, ERC20V1Factory_contractAddress, {
+	try { 
+		var instance = new web3.eth.Contract(_ERC20V1FactoryAbi, ERC20V1Factory_contractAddress, {
 																								from: accountAddress, 																	
 																								gasPrice: '20000000000'
 																							});
+	} catch (e) {
+		alert("请先连接钱包！！！");
+	}
 
 	try { 
 		var bignumberDecimals = new BigNumber(tokencoin_decimals);		
-		await instance.methods.createStdERC20(tokencoin_totalSupply, tokencoin_name, tokencoin_symbol, bignumberDecimals).send();
+		var hx = await instance.methods.createStdERC20(tokencoin_totalSupply, 
+												tokencoin_name, 
+												tokencoin_symbol, 
+												bignumberDecimals).send();
+	//	console.info(hx);										
 	  }
 	  catch (e) {
 		console.error("createStdERC20 error!" + e);
+	  }
+
+}
+
+
+async function showCloneERC20() {
+	//
+	try { 
+		var instance = await new web3.eth.Contract(_ERC20V1FactoryAbi, ERC20V1Factory_contractAddress, {
+																								from: accountAddress, 																	
+																								gasPrice: '20000000000'
+																							});
+	} catch (e) {
+		alert("请先连接钱包！！！");
+	}
+		//
+	try { 
+		var cloneERC2OList = await instance.methods.getTokenByUser(accountAddress).call({from: accountAddress}, function(error, result){
+		 																																console.info(error);	
+		 																																console.info(result);	
+		 																															});
+		console.info("cloneERC2OList");	
+		console.info(cloneERC2OList);
+		var cloneERC2OListStr = "";	
+		for (var i=0; i<cloneERC2OList.length; i++) { 
+			cloneERC2OListStr += "（" + (i+1) + "）" + cloneERC2OList[i] + ", ";
+		}
+		document.getElementById("std_ERC20Ext_list_id").innerText = cloneERC2OListStr;									
+	  } catch (e) {
+		console.info("getTokenByUser error!");
+
 	  }
 
 }

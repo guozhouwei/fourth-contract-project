@@ -73,7 +73,7 @@ contract ERC20Ext is ERC20, Ownable, IStdERC20 {
     ) external {
         creator = _creator;
         __totalSupply = _totalSupply;
-        //todo 因为本合约继承于ERC20，所以有些参数是不能修改的，改造方法不继承ERC20，暂略
+        //todo 因为本合约继承于ERC20，所以有些参数是不能修改的，改造方法不继承ERC20，实现方式相似 略
         // name
         __name = _name;
         // symbol

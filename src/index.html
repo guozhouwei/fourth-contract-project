@@ -8,7 +8,7 @@
 </head>
 <body>
     <div>
-        <button onclick="connect()">登陆</button>
+        <button onclick="connect()">连接钱包</button>
 
         <hr/>
         <div><font size=5, color="#FF0000"> 账户信息: </font> </div>
@@ -21,8 +21,8 @@
         <hr/>
         <div><font size=5, color="#FF0000"> 合约信息: </font> </div>
         <div>CloneFactory（克隆工厂合约）: <a href="https://sepolia.etherscan.io/tx/0xbb9be84d4713bd72e286df574dd825105ef9882d2d28a9dbacd42cfc36d33dcc" target="_blank">0x5AB310Aeb9a92017DB43c7282eDD6E1A2A29a1df</a></div>
-        <div>ERC20Ext（ERC20模板合约）: <a href="https://sepolia.etherscan.io/tx/0xc06ede3a9edbd9de42a13981128ca98def95d60c25c0b781eebefb6af0a061a5" target="_blank" id="std_ERC20Ext_id">0x9577C698e70b79A2B0761B610f88d34E7835cA8F</a></div>
-        <div>ERC20V1Factory（创建代币工厂合约）: <a href="https://sepolia.etherscan.io/tx/0xc06ede3a9edbd9de42a13981128ca98def95d60c25c0b781eebefb6af0a061a5" target="_blank" id="ERC20V1Factory_id">0x9577C698e70b79A2B0761B610f88d34E7835cA8F</a></div>
+        <div>ERC20Ext（ERC20模板合约）: <a href="https://sepolia.etherscan.io/tx/0xc06ede3a9edbd9de42a13981128ca98def95d60c25c0b781eebefb6af0a061a5" target="_blank">0x9577C698e70b79A2B0761B610f88d34E7835cA8F</a></div>
+        <div>ERC20V1Factory（创建代币工厂合约）: <a href="https://sepolia.etherscan.io/tx/0x376bf2021b19b8e1f76cc127d2d13fceda8aa1541a0f78f3ec324dfab03afbb6" target="_blank">0xEA35FFe6cfC2c83298712E5D56a3ECD1F2AFdd9f</a></div>
         <div>gitHub源码地址: <a href="https://github.com/guozhouwei/fourth-contract-project" target="_blank">https://github.com/guozhouwei/fourth-contract-project</a></div>
 
         <hr/>
@@ -36,6 +36,11 @@
         <div>代币支持的最小精度: <input type="text" id="tokencoin_decimals_id" value="18" size="10"/> （小数点后多少位）</div>
         <button onclick="buildTokenCoin()">发币</button> 
 
+        <hr/>
+        <div><font size=5, color="#FF0000"> clone的ERC20地址: </font> </div>
+        <button onclick="showCloneERC20()">查看</button> 
+        <div>合约列表: <span id="std_ERC20Ext_list_id"></span></div>
+        
     </div>
     <script src="./js/web3.min.js"> </script>
     <script src="./js/bignumber.js"> </script>
