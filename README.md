@@ -40,8 +40,7 @@ src/index.html
 
 ## 环境准备
 ### truffle
-export privKey="4c82fadaf6c15722511d474798669a6766de4c6ace00bce68f222486e43bb9ea"
-export infuraId="1e73ed255f3b47b8babc10b88e21577c"
+
 
 truffle migrate --network sepolia --to 2
 
