@@ -1,0 +1,53 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button onclick="connect()">登陆</button>
+
+        <hr/>
+        <div><font size=5, color="#FF0000"> 账户信息: </font> </div>
+        <div>账户地址: <span id="account_address"></span></div>
+        <div>ChainId: <span id="chain_id"></span></div>
+        <div>BlockNumber: <span id="block_number"></span></div>
+        <div>BlockTimestamp: <span id="block_timestamp"></span></div>
+        <div>余额：<span id="account_balance"></span></div>
+
+        <hr/>
+        <div><font size=5, color="#FF0000"> 合约信息: </font> </div>
+        <div>CloneFactory（克隆工厂合约）: <span id="account_address"></span></div>
+        <div>ERC20Ext（ERC20模板合约）: <span id="chain_id"></span></div>
+        <div>ERC20V1Factory（创建代币工厂合约）: <span id="block_number"></span></div>
+        <div>gitHub源码地址: <span id="block_timestamp"></span></div>
+
+        <hr/>
+
+
+        <div>Contract Address: <input type="text" id="contract_address" value="0x729511ef374d41Ccb44234D73Fd6c4a4dAbAd0DF" size="50" /> (已经部署到sepolia测试网络)</div>
+        <!-- 0x8d5e1aEEa3b9e50D73386968BCdB99cCA0FEC00b -->
+        <hr/>
+
+        <span><input type="text" id="mint" value="3"/> (默认18个0)</span>
+        <button onclick="mint()">Mint</button> 
+
+        <hr/>
+
+        <span></span><input type="text" id="burn" value="2"/> (默认18个0)</span>
+        <button onclick="burn()">Burn</button> 
+        <div>⚠️：代币 mint、burn 请到小狐狸钱包查看 </div>
+        <hr/>
+
+        <button onclick="read()">Read Contract</button> 
+        <div>Contract totalSupply: <span id="contractTotalSupply"></span></div>
+
+    </div>
+    <script src="./js/web3.min.js"> </script>
+    <script src="./js/bignumber.js"> </script>
+    <script src="./js/app.js"></script>
+</body>
+</html>
