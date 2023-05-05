@@ -79,7 +79,8 @@ module.exports = {
       },
       gas: 10000000,
       gasPrice: 150000000,
-      network_id: 11155111
+      network_id: 11155111,
+      timeoutBlocks: 20000
     },
     //
     // An additional network, but with some advanced options…
@@ -112,7 +113,7 @@ module.exports = {
 
   // Set default mocha options here, use special reporters, etc.
   mocha: {
-    // timeout: 100000
+     timeout: 100000
   },
 
   // Configure your compilers
